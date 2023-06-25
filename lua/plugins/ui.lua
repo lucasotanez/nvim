@@ -35,5 +35,9 @@ return {
         },
       }
     end,
-  }
+  },
+  {
+    'nvim-tree/nvim-web-devicons',
+    lazy = true,
+  },
 }
