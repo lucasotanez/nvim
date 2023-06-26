@@ -9,10 +9,17 @@ vim.api.nvim_create_autocmd('Filetype', {
 })
 
 -- discontinue comment when entering a new line
-vim.api.nvim_create_autocmd('BufEnter',
-  {
-    callback = function()
-      vim.opt.formatoptions = vim.opt.formatoptions -
-        { 'c', 'r', 'o' }
-    end,
-  })
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    vim.opt.formatoptions = vim.opt.formatoptions - { 'c', 'r', 'o' }
+  end,
+})
+
+-- lazy load keymap and user-defined commands
+vim.api.nvim_create_autocmd('User', {
+  group = vim.api.nvim_create_augroup('loadMaps', { clear = true }),
+  pattern = 'VeryLazy',
+  callback = function()
+    require('maps')
+  end,
+})
