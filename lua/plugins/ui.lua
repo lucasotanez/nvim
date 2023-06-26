@@ -36,10 +36,21 @@ return {
       }
     end,
   },
-
   {
     'nvim-tree/nvim-web-devicons',
     lazy = true,
+  },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      require('indent_blankline').setup {
+        -- Uncomment below for current context highlighting (not sure if useful yet...)
+        -- show_current_context = true,
+        -- show_current_context_start = true,
+        max_indent_increase = 1,
+      }
+    end,
   },
   {
     'nvim-tree/nvim-tree.lua',
