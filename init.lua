@@ -1,5 +1,4 @@
 require('base')
-require('maps')
 require('autocmds')
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
