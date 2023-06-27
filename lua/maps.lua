@@ -7,6 +7,12 @@ keymap.set({ 'n', 'v' }, '<C-p>', '"+p')
 -- do not yank with x
 keymap.set({'n', 'x'}, 'x', '"_x') 
 
+-- highlight block indentation
+vim.keymap.set('x', '<Tab>', '>gv', { remap = false })
+vim.keymap.set('x', '<S-Tab>', '<gv', { remap = false })
+vim.keymap.set('n', '<Tab>', '>>', { remap = false })
+vim.keymap.set('n', '<S-Tab>', '<<', { remap = false })
+
 -- navigation in insert mode 
 keymap.set({ 'i', 'c' }, '<C-k>', '<Up>', { remap = false})
 keymap.set({ 'i', 'c' }, '<C-h>', '<Left>', { remap = true})
@@ -32,8 +38,8 @@ keymap.set('n', '<C-a>', 'gg<S-v>G', { remap = false })
 -- new buffer
 keymap.set('n', '<C-t>', ':tabedit<Return>')
 -- split window
-keymap.set('n', '<C-s>', ':split<Return><C-w>w')
-keymap.set('n', '<C-v>', ':vsplit<Return><C-w><w')
+keymap.set('n', '<C-down>', ':split<Return><C-w>w')
+keymap.set('n', '<C-right>', ':vsplit<Return><C-w><w')
 -- navigate buffer
 keymap.set('n', '<C-w>', '<C-w>w')
 keymap.set('', '<C-h>', '<C-w>h')
