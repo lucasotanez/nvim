@@ -61,12 +61,12 @@ return {
       local HEIGHT_RATIO = 0.75
       local WIDTH_RATIO = 0.5
       -- turning off float will show a VSCode-style file explorer on left
-      local FLOAT_ENABLED = true 
+      local FLOAT_ENABLED = true
 
       -- custom mappings
       local function on_attach(bufnr)
         local api = require('nvim-tree.api')
-        
+
         local function opts(desc)
           return {
             desc = 'nvim-tree: ' .. desc,
