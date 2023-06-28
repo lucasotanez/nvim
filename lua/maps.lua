@@ -5,7 +5,7 @@ keymap.set({ 'n', 'v' }, '<C-y>', '"+y')
 keymap.set({ 'n', 'v' }, '<C-p>', '"+p')
 
 -- do not yank with x
-keymap.set({'n', 'x'}, 'x', '"_x') 
+keymap.set({'n', 'x'}, 'x', '"_x')
 
 -- highlight block indentation
 vim.keymap.set('x', '<Tab>', '>gv', { remap = false })
@@ -18,7 +18,7 @@ keymap.set({ 'i', 'c' }, '<C-k>', '<Up>', { remap = false})
 keymap.set({ 'i', 'c' }, '<C-h>', '<Left>', { remap = true})
 keymap.set({ 'i', 'c' }, '<C-j>', '<Down>', { remap = false})
 keymap.set({ 'i', 'c' }, '<C-l>', '<Right>', { remap = false})
-keymap.set({ 'i', 'c' }, '<C-w>', '<C-Right>', { remap = false}) 
+keymap.set({ 'i', 'c' }, '<C-w>', '<C-Right>', { remap = false})
 keymap.set({ 'i', 'c' }, '<C-b>', '<C-Left>', { remap = false})
 
 -- delete word backward in insert mode
@@ -35,17 +35,22 @@ keymap.set('n', '-', '<C-x>', { remap = false })
 -- select all
 keymap.set('n', '<C-a>', 'gg<S-v>G', { remap = false })
 
--- new buffer
-keymap.set('n', '<C-t>', ':tabedit<Return>')
 -- split window
 keymap.set('n', '<C-down>', ':split<Return><C-w>w')
 keymap.set('n', '<C-right>', ':vsplit<Return><C-w><w')
--- navigate buffer
+-- navigate window
 keymap.set('n', '<C-w>', '<C-w>w')
 keymap.set('', '<C-h>', '<C-w>h')
 keymap.set('', '<C-j>', '<C-w>j')
 keymap.set('', '<C-k>', '<C-w>k')
 keymap.set('', '<C-l>', '<C-w>l')
+
+-- new tab
+keymap.set('n', '<C-t>', ':tabedit<Return>')
+-- navigate tabs
+vim.keymap.set('n', '<C-p>', '<Cmd>-tabnext<CR>', { desc = 'Next tab' })
+vim.keymap.set('n', '<C-n>', '<Cmd>+tabnext<CR>', { desc = 'Prev tab' })
+vim.keymap.set('n', '<C-x>', '<Cmd>tabclose<CR>', { desc = 'Close current tab' })
 
 --resize
 keymap.set('n', '<left>', '<C-w><')
