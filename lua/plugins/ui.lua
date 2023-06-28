@@ -6,31 +6,68 @@ return {
       require('catppuccin').setup {
         flavour = 'macchiato'
       }
-      -- Uncomment to use 'catppuccin' as default loaded theme
       --require('catppuccin').load()
     end,
   },
   {
-    'tanvirtin/monokai.nvim',
-    name = 'monokai',
+    'ribru17/bamboo.nvim',
+    lazy = false,
     config = function()
-      require('monokai').setup {
-        palette = require('monokai').classic
+      require('bamboo').setup {
+        colors = {
+          white = '#eeeeee',
+        },
+        highlights = {
+          -- make comments stand out less 
+          -- use '$grey' for even quieter comments
+          ['@comment'] = { fg = '$light_grey' },
+
+          ['@variable'] = { fg = '$white' }
+        },
+        diagnostics = {
+          undercurl = false,
+        },
       }
-    end
+      require('bamboo').load()
+    end,
   },
   {
-    'ellisonleao/gruvbox.nvim',
-    name = 'gruvbox',
+    'navarasu/onedark.nvim',
+    event = { 'VeryLazy' },
     config = function()
-      require('gruvbox').setup {
-        pallete_overrides = {},
-        background = 'dark'
+      require('onedark').setup {
+        --style = 'warmer',
+        highlights = {
+          -- make pop up windows blend better with the background
+          ['FloatBorder'] = { bg = '$bg0' },
+          ['NormalFloat'] = { bg = '$bg0' },
+          ['NvimTreeNormal'] = { bg = '$bg0' },
+          ['NvimTreeEndOfBuffer'] = { bg = '$bg0', fg = '$bg0' },
+          -- prevent Lua constructor tables from being bolded
+          ['@constructor.lua'] = { fg = '$yellow', fmt = 'none' },
+          ['@function.builtin'] = { fg = '$orange' },
+          -- italicize parameters and conditionals
+          ['@parameter'] = { fmt = 'italic' },
+          ['@conditional'] = { fmt = 'italic' },
+          -- change bracket color so that it doesn't conflict with string color
+          ['TSRainbowGreen'] = { fg = '$fg' },
+          -- better match paren highlights
+          ['MatchParen'] = { fg = '$orange', fmt = 'bold' },
+          -- better dashboard styling
+          ['@alpha.title'] = { fg = '$green' },
+          ['@alpha.header'] = { fg = '$yellow', fmt = 'bold' },
+          ['@alpha.footer'] = { fg = '$red', fmt = 'italic' },
+        },
+        diagnostics = {
+          darker = false,
+        }
       }
-    end
+      --require('onedark').load()
+    end,
   },
   {
     'nvim-lualine/lualine.nvim',
+    event = { 'VeryLazy' },
     config = function()
       -- statusline that shows current and total line number 
       local function line_total()
@@ -145,11 +182,11 @@ return {
           },
         },
         renderer = {
-          -- add '/' at the end of a folder
+          -- '/' at the end of a folder
           add_trailing = false,
           icons = {
             show = {
-              --remove annoying icons
+              -- icons
               modified = true,
               git = false,
             },
