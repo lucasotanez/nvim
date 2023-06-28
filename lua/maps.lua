@@ -52,7 +52,7 @@ vim.keymap.set('n', '<C-p>', '<Cmd>-tabnext<CR>', { desc = 'Next tab' })
 vim.keymap.set('n', '<C-n>', '<Cmd>+tabnext<CR>', { desc = 'Prev tab' })
 vim.keymap.set('n', '<C-x>', '<Cmd>tabclose<CR>', { desc = 'Close current tab' })
 
---resize
+-- resize
 keymap.set('n', '<left>', '<C-w><')
 keymap.set('n', '<right>', '<C-w>>')
 keymap.set('n', '<up>', '<C-w>+')

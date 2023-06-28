@@ -6,8 +6,28 @@ return {
       require('catppuccin').setup {
         flavour = 'macchiato'
       }
-      require('catppuccin').load()
+      -- Uncomment to use 'catppuccin' as default loaded theme
+      --require('catppuccin').load()
     end,
+  },
+  {
+    'tanvirtin/monokai.nvim',
+    name = 'monokai',
+    config = function()
+      require('monokai').setup {
+        palette = require('monokai').classic
+      }
+    end
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+    name = 'gruvbox',
+    config = function()
+      require('gruvbox').setup {
+        pallete_overrides = {},
+        background = 'dark'
+      }
+    end
   },
   {
     'nvim-lualine/lualine.nvim',
@@ -28,7 +48,9 @@ return {
           disabled_filetypes = {
             'alpha',
           },
-          theme = 'powerline',
+          -- Powerline looks good with 'catppuccin'
+          --theme = 'powerline'
+          theme = 'onedark',
         },
       }
     end,

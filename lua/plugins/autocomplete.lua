@@ -8,9 +8,6 @@ return {
       local cond = require 'nvim-autopairs.conds'
 
       -- rule for: `(|)` -> Space -> `( | )` and associated deletion options
-      -- NOTE: this adds a rule to delete both spaces if the cursor is in
-      -- between two of them NO MATTER WHAT. if this gets annoying it may need
-      -- a change
       local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
       npairs.add_rules {
         Rule(' ', ' ')
