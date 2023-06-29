@@ -60,7 +60,15 @@ return {
           require('lspconfig').clangd.setup {
             capabilities = capabilities,
             cmd = { 'clangd', '--header-insertion-decorators=false' },
+            filetypes = {'c', 'cpp', 'objc'}
           }
+          -- NOTE about using clangd with c++:
+          -- Compiler flags should be supplied in a file at the root directory:
+          -- either 'compile_flags.txt' (simple projects with pure Makefiles),
+          -- or 'compile_commands.json' (projects using Cmake).
+          -- These files tell the LSP how your specific project is organized so that it
+          -- can be parsed accurately.
+          -- https://clang.llvm.org/docs/JSONCompilationDatabase.html
         end,
       }
 
