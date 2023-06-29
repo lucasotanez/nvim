@@ -12,6 +12,7 @@ return {
   {
     'ribru17/bamboo.nvim',
     lazy = false,
+    priority = 1000,
     config = function()
       require('bamboo').setup {
         colors = {
@@ -22,7 +23,7 @@ return {
           -- use '$grey' for even quieter comments
           ['@comment'] = { fg = '$light_grey' },
 
-          ['@variable'] = { fg = '$white' }
+          --['@variable'] = { fg = '$white' }
         },
         diagnostics = {
           undercurl = false,
@@ -33,6 +34,9 @@ return {
   },
   {
     'navarasu/onedark.nvim',
+    -- Primary (default loaded) colorscheme should not lazy load, 
+    -- as it may cause conflict with other lazy plugins such as lualine
+    --lazy = false,
     event = { 'VeryLazy' },
     config = function()
       require('onedark').setup {
@@ -140,6 +144,7 @@ return {
 
         vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
         vim.keymap.set('n', '<Esc>', api.tree.close, opts('Close'))
+        vim.keymap.set('n', 'q', api.tree.close, opts('Close'))
 
         -- END CUSTOM MAPPINGS
 
@@ -201,4 +206,16 @@ return {
       }
     end,
   },
+  {
+    'lewis6991/gitsigns.nvim',
+    event = { 'VeryLazy' },
+    config = function()
+      require('gitsigns').setup {
+        sign_priority = 0,
+        preview_config = {
+          border = 'rounded',
+        },
+      }
+    end,
+  }
 }
