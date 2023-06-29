@@ -1,5 +1,6 @@
 {
   "bamboo.nvim": { "branch": "master", "commit": "6c39213a2795976d97934ed095f9e60c75c3dddd" },
+  "bufferline.nvim": { "branch": "main", "commit": "2f391fde91b9c3876eee359ee24cc352050e5e48" },
   "catppuccin": { "branch": "main", "commit": "233c4175780d9b4e39ae4fe4535c1e4c14bd76ed" },
   "gitsigns.nvim": { "branch": "main", "commit": "a36bc3360d584d39b4fb076d855c4180842d4444" },
   "indent-blankline.nvim": { "branch": "master", "commit": "7075d7861f7a6bbf0de0298c83f8a13195e6ec01" },

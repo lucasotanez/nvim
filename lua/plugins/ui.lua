@@ -217,5 +217,24 @@ return {
         },
       }
     end,
-  }
+  },
+  {
+    'akinsho/bufferline.nvim',
+    event = { 'VeryLazy' },
+    config = function()
+      require('bufferline').setup {
+        options = {
+          mode = 'tabs',
+          separator_style = 'slant',
+          color_icons = true,
+          show_close_icon = false,
+          show_buffer_close_icons = false,
+          always_show_bufferline = false,
+          modified_icon = '',
+          diagnostics = 'nvim_lsp',
+          -- TODO: show diagnostic info in buffer tabs
+        },
+      }
+    end
+  },
 }
