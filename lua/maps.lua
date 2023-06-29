@@ -57,3 +57,9 @@ keymap.set('n', '<left>', '<C-w><')
 keymap.set('n', '<right>', '<C-w>>')
 keymap.set('n', '<up>', '<C-w>+')
 keymap.set('n', '<down>', '<C-w>-')
+
+-- clear search highlighting
+keymap.set('n', '<Esc>', '<Cmd>noh<CR>')
+
+-- jump to middle of buffer
+keymap.set('n', 'gm', '50%<CR>', { desc = 'Jump to middle of buffer' })
