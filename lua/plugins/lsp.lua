@@ -67,18 +67,28 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
-          local opts = { buffer = ev.buf, remap = false, silent = true }
-          vim.keymap.set('n', 'E', function() vim.lsp.buf.hover() end, opts)
-          vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, 
-            { desc = 'Expand vim diagnostic' })
-          vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+          local function opts(desc)
+            return {
+              desc = 'lsp: ' .. desc,
+              buffer = ev.buf,
+              remap = false,
+              silent = true,
+            }
+          end
 
+          -- BEGIN CUSTOM KEYMAPS
+
+          vim.keymap.set('n', 'E', function() vim.lsp.buf.hover() end, opts('show info'))
+          vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float,
+            { desc = 'Expand vim diagnostic' })
+          vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end,
+            opts('goto definition'))
           vim.keymap.set('n', 'gD', '<cmd>tab split | lua vim.lsp.buf.definition()<CR>',
-            opts)
+            opts('goto definition in new tab'))
           vim.keymap.set('n', '<leader>dp', function() vim.diagnostic.goto_prev() end,
-            opts)
+            opts('cycle previous diagnostic message'))
           vim.keymap.set('n', '<leader>dn', function() vim.diagnostic.goto_next() end,
-            opts)
+            opts('cycle next diagnostic message'))
           --vim.keymap.set('n', '<leader>r', function()
           --  local new_name = vim.fn.input { prompt = 'New name: ' }
           --  if #new_name == 0 then
@@ -90,8 +100,10 @@ return {
             vim.lsp.buf.code_action {
               apply = true,
             }
-          end, opts)
-          vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts)
+          end, opts('run code action'))
+          vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, opts('codelens'))
+
+          --END CUSTOM KEYMAPS
         end,
       })
 
