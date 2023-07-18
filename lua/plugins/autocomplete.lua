@@ -41,6 +41,18 @@ return {
     end,
   },
   {
+    'L3MON4D3/LuaSnip',
+    lazy = true,
+    config = function()
+      local ls = require('luasnip')
+      ls.config.set_config {
+        enable_autosnippets = true,
+        history = true,
+      }
+      require('luasnip.loaders.from_lua').lazy_load { paths = './snippets' }
+    end,
+  },
+  {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter' },
     dependencies = {
@@ -48,10 +60,53 @@ return {
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
       { 'hrsh7th/cmp-nvim-lua' },
+      { 'saadparwaiz1/cmp_luasnip' },
     },
     config = function()
       local cmp = require('cmp')
+
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+
+      -- mappings
+      local cmp_select = { behavior = cmp.SelectBehavior.Select }
+      local luasnip = require('luasnip')
+      local cmp_mappings = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<Tab>'] = cmp.mapping( function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
+        ['<CR>'] = cmp.mapping(function(fallback)
+          fallback()
+        end),
+      }
+
       local cmp_config = {
+        mapping = cmp_mappings,
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
@@ -59,15 +114,16 @@ return {
           { name = 'path' },
           { name = 'nvim_lua', ft = 'lua' },
           { name = 'nvim_lsp' },
+          { name = 'luasnip' },
           { name = 'buffer', keyword_length = 3 },
         },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        experimental = {
-          ghost_test = true,
-        },
+        --experimental = {
+        --  ghost_text = true,
+        --},
       }
 
       cmp.setup(cmp_config)
