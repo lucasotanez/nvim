@@ -40,4 +40,37 @@ return {
       )
     end,
   },
+  {
+    'hrsh7th/nvim-cmp',
+    event = { 'InsertEnter' },
+    dependencies = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-nvim-lua' },
+    },
+    config = function()
+      local cmp = require('cmp')
+      local cmp_config = {
+        completion = {
+          completeopt = 'menu,menuone,noinsert',
+        },
+        sources = {
+          { name = 'path' },
+          { name = 'nvim_lua', ft = 'lua' },
+          { name = 'nvim_lsp' },
+          { name = 'buffer', keyword_length = 3 },
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        experimental = {
+          ghost_test = true,
+        },
+      }
+
+      cmp.setup(cmp_config)
+    end,
+  },
 }
