@@ -293,16 +293,18 @@ return {
               preview_cutoff = 0,
             },
           },
-          prompt_prefix = '> ',
-          initial_mode = 'normal',
+          prompt_prefix = ' 󰍉 ',
+          initial_mode = 'insert',
           mappings = {
             n = {
               ['<Tab>'] = multi_tab,
               ['<leader>t'] = close_with_action,
               ['<C-k>'] = actions.move_selection_previous,
               ['<C-j>'] = actions.move_selection_next,
+              -- using <Space> here causes a delay since it is leader key.
+              -- it's fine for now since i usually use the bind in insert mode only.
               ['<Space>'] = {
-                actions.toggle_selection,
+                actions.toggle_selection + actions.move_selection_previous,
                 type = 'action',
                 opts = { nowait = true, silent = true, noremap = true },
               },
@@ -317,7 +319,7 @@ return {
               ['<C-k>'] = actions.move_selection_previous,
               ['<C-j>'] = actions.move_selection_next,
               ['<C-Space>'] = {
-                actions.toggle_selection,
+                actions.toggle_selection + actions.move_selection_previous,
                 type = 'action',
                 opts = { nowait = true, silent = true, noremap = true },
               },
