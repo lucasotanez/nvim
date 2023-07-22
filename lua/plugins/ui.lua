@@ -237,4 +237,102 @@ return {
       }
     end
   },
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    keys = {
+      { '<leader>ff' },
+      { '<leader>fg' },
+      { '<leader>fb' },
+      { '<leader>fh' }
+    },
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local actions = require('telescope.actions')
+
+      -- open selected buffers in new tabs
+      local function multi_tab(prompt_bufnr)
+        local state = require 'telescope.actions.state'
+        local picker = state.get_current_picker(prompt_bufnr)
+        local multi = picker:get_multi_selection()
+        local str = ''
+        if #multi > 0 then
+          for _, j in pairs(multi) do
+            str = str .. 'tabe ' .. j.filename .. ' | '
+          end
+          actions.close(prompt_bufnr)
+          vim.api.nvim_command(str)
+        else
+          require('telescope.actions').select_tab(prompt_bufnr)
+        end
+      end
+
+      local function close_with_action(prompt_bufnr)
+        require('telescope.actions').close(prompt_bufnr)
+        vim.cmd [[NvimTreeFindFileToggle]]
+      end
+
+      local putils = require('telescope.previewers.utils')
+      local telescope = require('telescope')
+
+      telescope.setup {
+        defaults = {
+          preview = {
+            filetype_hook = function(_, bufnr, opts)
+              -- no display pdf previews
+              if opts.ft == 'pdf' then
+                putils.set_preview_message(bufnr, opts.winid,
+                  'Not displaying ' .. opts.ft)
+                return false
+              end
+            return true
+          end,
+          },
+          layout_config = {
+            horizontal = {
+              preview_cutoff = 0,
+            },
+          },
+          prompt_prefix = '> ',
+          initial_mode = 'normal',
+          mappings = {
+            n = {
+              ['<Tab>'] = multi_tab,
+              ['<leader>t'] = close_with_action,
+              ['<C-k>'] = actions.move_selection_previous,
+              ['<C-j>'] = actions.move_selection_next,
+              ['<Space>'] = {
+                actions.toggle_selection,
+                type = 'action',
+                opts = { nowait = true, silent = true, noremap = true },
+              },
+              ['q'] = {
+                actions.close,
+                type = 'action',
+                opts = { nowait = true, silent = true, noremap = true },
+              },
+            },
+            i = {
+              ['<Tab>'] = multi_tab,
+              ['<C-k>'] = actions.move_selection_previous,
+              ['<C-j>'] = actions.move_selection_next,
+              ['<C-Space>'] = {
+                actions.toggle_selection,
+                type = 'action',
+                opts = { nowait = true, silent = true, noremap = true },
+              },
+              ['<C-l>'] = false -- override Telescope default
+            },
+          },
+        },
+      }
+
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+    end
+  },
 }
