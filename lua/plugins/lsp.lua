@@ -74,6 +74,30 @@ return {
           -- can be parsed accurately.
           -- https://clang.llvm.org/docs/JSONCompilationDatabase.html
         end,
+        ['cssls'] = function()
+          require('lspconfig').cssls.setup {
+            settings = {
+              css = {
+                validate = true,
+                lint = {
+                  unknownAtRules = "ignore"
+                }
+              },
+              scss = {
+                validate = true,
+                lint = {
+                  unknownAtRules = "ignore"
+                }
+              },
+              less = {
+                validate = true,
+                lint = {
+                  unknownAtRules = "ignore"
+                }
+              }
+            }
+          }
+        end
       }
 
       vim.api.nvim_create_autocmd('LspAttach', {
