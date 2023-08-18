@@ -21,7 +21,11 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require('mason').setup()
-      require('mason-lspconfig').setup()
+      require('mason-lspconfig').setup {
+        -- these will be auto-installed and standard in my config
+        -- can remove languages that aren't frequently used
+        ensure_installed = { 'lua_ls', 'clangd', 'gopls', 'tsserver', 'cssls', 'jsonls' }
+      }
 
       --require('lspconfig.ui.windows').default_options_border = 'rounded'
       require('mason-lspconfig').setup_handlers {
