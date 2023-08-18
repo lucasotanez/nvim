@@ -1,7 +1,5 @@
 return {
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
+  { 'catppuccin/nvim', name = 'catppuccin',
     config = function()
       require('catppuccin').setup {
         flavour = 'macchiato'
@@ -246,7 +244,7 @@ return {
       { '<leader>fb' },
       { '<leader>fh' }
     },
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' },
     config = function()
       local actions = require('telescope.actions')
 
