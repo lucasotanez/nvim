@@ -24,7 +24,7 @@ return {
       require('mason-lspconfig').setup {
         -- these will be auto-installed and standard in my config
         -- can remove languages that aren't frequently used
-        ensure_installed = { 'lua_ls', 'clangd', 'gopls', 'tsserver', 'cssls', 'jsonls' }
+        ensure_installed = { 'lua_ls', 'clangd', 'gopls', 'tsserver', 'cssls', 'jsonls', 'jdtls' }
       }
 
       --require('lspconfig.ui.windows').default_options_border = 'rounded'
