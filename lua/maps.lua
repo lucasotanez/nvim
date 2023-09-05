@@ -63,3 +63,7 @@ keymap.set('n', '<Esc>', '<Cmd>noh<CR>')
 
 -- jump to middle of buffer
 keymap.set('n', 'gm', '50%<CR>', { desc = 'Jump to middle of buffer' })
+
+-- jump to beginning and end of lines (whitespace sensitive)
+keymap.set('n', 'L', 'g_', { desc = 'jump to end of text line'})
+keymap.set('n', 'H', '^', { desc = 'jump to beginning of text line'})
