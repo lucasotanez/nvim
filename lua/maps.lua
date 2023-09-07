@@ -5,7 +5,10 @@ keymap.set({ 'n', 'v' }, '<C-y>', '"+y')
 keymap.set({ 'n', 'v' }, '<C-p>', '"+p')
 
 -- do not yank with x
-keymap.set({'n', 'x'}, 'x', '"_x')
+keymap.set({ 'n', 'x' }, 'x', '"_x')
+
+-- do not yank with paste
+keymap.set({ 'n', 'v' }, 'p', 'P')
 
 -- highlight block indentation
 vim.keymap.set('x', '<Tab>', '>gv', { remap = false })
