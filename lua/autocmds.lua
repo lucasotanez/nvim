@@ -23,3 +23,10 @@ vim.api.nvim_create_autocmd('User', {
     require('maps')
   end,
 })
+
+vim.api.nvim_create_augroup('setSpell', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'setSpell',
+  pattern = { 'markdown' },
+  command = 'set spell'
+})
