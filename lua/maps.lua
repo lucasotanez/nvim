@@ -8,7 +8,7 @@ keymap.set({ 'n', 'v' }, '<C-p>', '"+p')
 keymap.set({ 'n', 'x' }, 'x', '"_x')
 
 -- do not yank with paste
-keymap.set({ 'n', 'v' }, 'p', 'P')
+keymap.set({ 'v' }, 'p', '"_dP')
 
 -- highlight block indentation
 vim.keymap.set('x', '<Tab>', '>gv', { remap = false })
