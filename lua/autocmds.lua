@@ -24,9 +24,9 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-vim.api.nvim_create_augroup('setSpell', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'setSpell',
-  pattern = { 'markdown' },
-  command = 'set spell'
-})
+--vim.api.nvim_create_augroup('setSpell', { clear = true })
+--vim.api.nvim_create_autocmd('FileType', {
+--  group = 'setSpell',
+--  pattern = { 'markdown' },
+--  command = 'set spell'
+--})

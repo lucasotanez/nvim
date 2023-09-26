@@ -31,6 +31,12 @@ return {
     end,
   },
   {
+    'projekt0n/caret.nvim',
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+  },
+  {
     'navarasu/onedark.nvim',
     -- Primary (default loaded) colorscheme should not lazy load, 
     -- as it may cause conflict with other lazy plugins such as lualine
