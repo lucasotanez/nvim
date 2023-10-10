@@ -6,4 +6,9 @@ return {
       vim.fn['mkdp#util#install']()
     end,
   },
+  {
+    'dkarter/bullets.vim',
+    ft = { 'markdown', 'text' },
+    cmd = { 'InsertNewBullet'},
+  }
 }
