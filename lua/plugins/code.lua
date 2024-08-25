@@ -12,11 +12,13 @@ return {
       local util = require('conform.util')
       local deno_fmt = require('conform.formatters.deno_fmt')
       local clang_format = require('conform.formatters.clang_format')
+      local black_format = require('conform.formatters.black_format')
       util.add_formatter_args(deno_fmt, { '--single-quote' }, { append = true })
       util.add_formatter_args(clang_format, {
         '--style',
         '{IndentWidth: 4, AllowShortFunctionsOnASingleLine: Empty}',
       })
+      util.add_formatter_args(black_format, { '--line-length', '100' })
       require('conform').setup {
         format_on_save = {
           timeout_ms = 1000,
@@ -36,7 +38,7 @@ return {
           lua = { 'stylua' },
           luau = { 'stylua' },
           markdown = { 'deno_fmt', 'injected' },
-          python = { 'yapf' },
+          python = { 'black' },
           typescript = { 'deno_fmt' },
           typescriptreact = { 'deno_fmt' },
         },
